@@ -53,7 +53,7 @@ def mutate(child, mutation_rate):
 def init2(II, starting, mutation_rate):
     g0 = []
     for i in range(II):
-        g0.append(mutate(starting, mutation_rate))
+        g0.append(mutate(starting, 1))
     return g0
 
 #init state
@@ -146,4 +146,4 @@ def train(iter, max_iter, g0, knapSack, II, object_values, object_weights, best_
 #tmpSolution = [0,0,0,0,0,0,0,0,0,0]
 #solution = train(0, 990, init2(II, tmpSolution, 1), knapSack, II, values, weights, tmpSolution, .5)
 #print(solution)
-#print(eval([solution], knapSack, values, weights)[0][0])
+#print(score(solution,  values, weights, knapSack))

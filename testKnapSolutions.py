@@ -6,7 +6,6 @@ import random
 
 def generateWtVal(knapSack, length):
     i = 0
-    maxWt = 100
     weights = []
     values = []
     while i < length:
@@ -18,11 +17,11 @@ def generateWtVal(knapSack, length):
     return [weights, values]
 
 def run(maxObjects, knapSack, II):
-    l = 1000
+    l = 5
     timeGa = []
     timeDyn = []
     lengths = []
-    losses = []
+    ga_vals = []
     max_vals = []
     correct = 0
     loss_val = 0
@@ -42,22 +41,20 @@ def run(maxObjects, knapSack, II):
         max_vals.append(m)
         timeDyn.append(end-start)
         lengths.append(l)
-        loss = (m - solutionValue)
-        loss_val = loss_val + loss
-        losses.append(loss)
+        ga_vals.append(solutionValue)
         if m == solutionValue: correct = correct + 1
         l = l + 2
+        #print(f"iter: {l}")
     print("Percentage correct: {}".format(correct/maxObjects))
-    print("average loss of value by GA: {}".format(loss_val/((maxObjects - 10) / 2)))
     fig, (ax1, ax2) = plt.subplots(2)
     ax1.plot(lengths, timeGa, label="GA")
     ax1.plot(lengths, timeDyn, label="DYN")
-    ax2.plot(lengths, losses)
-    ax2.plot(lengths, max_vals)
+    ax2.plot(lengths, ga_vals, label="GA")
+    ax2.plot(lengths, max_vals, label="DYN")
     plt.legend()
     plt.show()
 
 
 knapSack = 1000#size of knapsack
 II = 8
-run(5000, knapSack, II)
+run(500, knapSack, II)
